@@ -31,6 +31,10 @@ void getProblem() {
                 problem = new Problem6_RemoveNthNode();
                 break;
 
+            case (int)PROBLEM.SET_MATRIX_ZEROES:
+                problem =new Problem21_SetMatrixZeroes();
+                break;
+
             case (int)PROBLEM.VALIDATE_BINARY_SEARCH_TREE:
                 problem = new Problem25_ValidateBinarySearchTree();
                 break;
@@ -62,5 +66,6 @@ enum PROBLEM {
     LONGEST_SUBSTRING_WITHOUT_REPEATING,
     LONGEST_PALINDROMIC_SUBSTRING,
     REMOVE_NTH_NODE,
+    SET_MATRIX_ZEROES,
     VALIDATE_BINARY_SEARCH_TREE
 }
