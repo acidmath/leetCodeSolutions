@@ -31,6 +31,10 @@ void getProblem() {
                 problem = new Problem6_RemoveNthNode();
                 break;
 
+            case (int)PROBLEM.VALIDATE_BINARY_SEARCH_TREE:
+                problem = new Problem25_ValidateBinarySearchTree();
+                break;
+
             default:
                 throw new Exception("somehow the input validation failed");
 
@@ -57,5 +61,6 @@ enum PROBLEM {
     TWOSUM,
     LONGEST_SUBSTRING_WITHOUT_REPEATING,
     LONGEST_PALINDROMIC_SUBSTRING,
-    REMOVE_NTH_NODE
+    REMOVE_NTH_NODE,
+    VALIDATE_BINARY_SEARCH_TREE
 }
