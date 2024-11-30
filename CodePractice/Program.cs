@@ -8,7 +8,8 @@ Dictionary<PROBLEM, Type> Problems = new(){
     { PROBLEM.REMOVE_NTH_NODE, typeof(Problem6_RemoveNthNode) },    
     { PROBLEM.SET_MATRIX_ZEROES, typeof(Problem21_SetMatrixZeroes) },
     { PROBLEM.VALIDATE_BINARY_SEARCH_TREE, typeof(Problem25_ValidateBinarySearchTree) },
-    { PROBLEM.MERGE_TWO_SORTED_LISTS, typeof(MergeTwoSortedLists) }
+    { PROBLEM.MERGE_TWO_SORTED_LISTS, typeof(MergeTwoSortedLists) },
+    { PROBLEM.GENERATE_PARENTHESES, typeof(GenerateParentheses) }
 };
 
 void GetProblem() {
@@ -55,5 +56,6 @@ enum PROBLEM {
     REMOVE_NTH_NODE,
     SET_MATRIX_ZEROES,
     VALIDATE_BINARY_SEARCH_TREE,
-    MERGE_TWO_SORTED_LISTS
+    MERGE_TWO_SORTED_LISTS,
+    GENERATE_PARENTHESES
 }
