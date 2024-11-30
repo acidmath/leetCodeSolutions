@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CodePractice {
+﻿namespace CodePractice {
 
     /// <summary>
     /// Solution to <see href="https://leetcode.com/problems/merge-two-sorted-lists/description/">this problem</see>
@@ -31,18 +25,10 @@ namespace CodePractice {
         */
         internal override void Run() {
             if (TryGetInput(out ListNode? listNode1, out ListNode? listNode2)) {
-                Console.Clear();
-                Console.Write("List 1: ");
-                while (listNode1 != null) {
-                    Console.Write(listNode1.val);
-                    listNode1 = listNode1.next;
-                }
-                Console.WriteLine();
-                Console.Write("List 2: ");
-                while (listNode2 != null) {
-                    Console.Write(listNode2.val);
-                    listNode2 = listNode2.next;
-                }
+                PrintListNode(listNode1, "List 1: ");
+                PrintListNode(listNode2, "List 2: ");
+                ListNode? mergedListNode = MergeNodes(listNode1, listNode2);
+                PrintListNode(mergedListNode, "Merged List: ");
             }
         }
 
@@ -56,8 +42,8 @@ namespace CodePractice {
                 return false;
             }
 
-            if(!TryParseInput(input, out listNode1)) {                
-                Console.WriteLine("Malformed input not accepted");                
+            if (!TryParseInput(input, out listNode1)) {
+                Console.WriteLine("Malformed input not accepted");
                 return false;
             }
 
@@ -84,7 +70,7 @@ namespace CodePractice {
                 for (int i = nodeValues.Length - 1; i >= 0; i--) {
                     string nodeValue = nodeValues[i];
                     listNode = new ListNode(int.Parse(nodeValue));
-                    if (lastNode != null) listNode.next = lastNode;
+                    if (lastNode != null) listNode.Next = lastNode;
                     lastNode = listNode;
                 }
                 return true;
@@ -93,15 +79,50 @@ namespace CodePractice {
                 return false;
             }
         }
+
+        private void PrintListNode(ListNode? listNode, string label) {
+            Console.Write(label);
+            while (listNode != null) {
+                Console.Write(listNode.Value);
+                listNode = listNode.Next;
+            }
+            Console.WriteLine();
+        }
+                
+        private ListNode? MergeNodes(ListNode? listNode1, ListNode? listNode2) {
+            
+            if (listNode1 == null) return listNode2;
+            if (listNode2 == null) return listNode1;
+            ListNode listNode = new();
+
+            if (listNode1.Value > listNode2.Value) {
+                SetListNodeValue(listNode, listNode2.Value);
+                listNode2 = listNode2.Next;
+            }
+            else {
+                SetListNodeValue(listNode, listNode1.Value);
+                listNode1 = listNode1.Next;
+            }
+                
+            listNode.Next = MergeNodes(listNode1, listNode2);
+            
+            return listNode;
+        }
+
+        private void SetListNodeValue(ListNode? listNode, int value) {
+            if (listNode == null) listNode = new ListNode(value);
+            else listNode.Value = value;
+        }
     }
 
     public class ListNode {
-        public int val;
-        public ListNode? next;
+        public int Value;
+        public ListNode? Next;
 
         public ListNode(int val = 0, ListNode? next = null) {
-            this.val = val;
-            this.next = next;
+            Value = val;
+            Next = next;
         }
     }
+
 }
