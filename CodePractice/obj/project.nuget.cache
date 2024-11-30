@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fDm+b00EdR+lY/myD8PZMe04Mcqf5o9C22JWAuV+H2Hr4kPVW0a3yijAjI3VMkKslcI7HZrjHbhfeq7Z+JgIag==",
+  "dgSpecHash": "+RiQUeAqi+4=",
   "success": true,
-  "projectFilePath": "C:\\git\\CodePractice\\CodePractice\\CodePractice.csproj",
+  "projectFilePath": "C:\\git\\leetCodeSolutions\\CodePractice\\CodePractice.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

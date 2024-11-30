@@ -1,5 +1,12 @@
 ﻿using CodePractice;
 
+Dictionary<PROBLEM, Type> Problems = new Dictionary<PROBLEM, Type>() { 
+    new(
+        PROBLEM.TWOSUM,
+        typeof(Problem1_TwoSum)
+        )
+    };
+
 void getProblem() {
     foreach (PROBLEM problem in Enum.GetValues(typeof(PROBLEM))) {
 
@@ -60,6 +67,7 @@ getProblem();
 /// <summary>
 /// Problems coming from this list
 /// https://leetcode.com/list/xoqag3yj/
+/// outdated as of 2024-11-30
 /// </summary>
 enum PROBLEM {
     TWOSUM,
