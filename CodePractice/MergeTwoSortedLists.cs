@@ -115,6 +115,7 @@
         }
     }
 
+    // typically I would put a new class in a new file, but the purpose of this repo is more algorithm focused rather than class/file organization
     public class ListNode {
         public int Value;
         public ListNode? Next;
