@@ -1,68 +1,46 @@
 ﻿using CodePractice;
 
-Dictionary<PROBLEM, Type> Problems = new Dictionary<PROBLEM, Type>() { 
-    new(
-        PROBLEM.TWOSUM,
-        typeof(Problem1_TwoSum)
-        )
-    };
+Dictionary<PROBLEM, Type> Problems = new(){ 
+    { PROBLEM.QUIT, typeof(Quit) },
+    { PROBLEM.TWOSUM, typeof(Problem1_TwoSum) },
+    { PROBLEM.LONGEST_SUBSTRING_WITHOUT_REPEATING, typeof(Problem2_LongestSubstringWithoutRepeating) },
+    { PROBLEM.LONGEST_PALINDROMIC_SUBSTRING, typeof(Problem3_LongestPalindromicSubstring) },
+    { PROBLEM.REMOVE_NTH_NODE, typeof(Problem6_RemoveNthNode) },    
+    { PROBLEM.SET_MATRIX_ZEROES, typeof(Problem21_SetMatrixZeroes) },
+    { PROBLEM.VALIDATE_BINARY_SEARCH_TREE, typeof(Problem25_ValidateBinarySearchTree) },
+    { PROBLEM.MERGE_TWO_SORTED_LISTS, typeof(MergeTwoSortedLists) }
+};
 
-void getProblem() {
-    foreach (PROBLEM problem in Enum.GetValues(typeof(PROBLEM))) {
+void GetProblem() {
+    PrintProblems();
 
-        Console.WriteLine($"{(int)problem}) {problem}");
-
-    }
-
-    string? problemChosen_s = Console.ReadLine();
-
-    if (int.TryParse(problemChosen_s, out int problemChosen) && Enum.IsDefined(typeof(PROBLEM), problemChosen)) {
-
-        Problem problem;
-
-        switch (problemChosen) {
-
-            case (int)PROBLEM.TWOSUM:
-                problem = new Problem1_TwoSum();
-                break;
-
-            case (int)PROBLEM.LONGEST_SUBSTRING_WITHOUT_REPEATING:
-                problem = new Problem2_LongestSubstringWithoutRepeating();
-                break;
-
-            case (int)PROBLEM.LONGEST_PALINDROMIC_SUBSTRING:
-                problem = new Problem3_LongestPalindromicSubstring();
-                break;
-
-            case (int)PROBLEM.REMOVE_NTH_NODE:
-                problem = new Problem6_RemoveNthNode();
-                break;
-
-            case (int)PROBLEM.SET_MATRIX_ZEROES:
-                problem =new Problem21_SetMatrixZeroes();
-                break;
-
-            case (int)PROBLEM.VALIDATE_BINARY_SEARCH_TREE:
-                problem = new Problem25_ValidateBinarySearchTree();
-                break;
-
-            default:
-                throw new Exception("somehow the input validation failed");
-
-        }
-
-        problem.Run();
-
+    string? problemChosenInput = Console.ReadLine();
+    bool validInt = int.TryParse(problemChosenInput, out int problemChosen);
+    bool validProblem = Problems.TryGetValue((PROBLEM)problemChosen, out Type? problemType) && problemType!=null;
+    bool validInput = validInt && validProblem;
+    if (validInput) {
+        Problem? problem = Activator.CreateInstance(problemType!) as Problem;
+        if (problem == null) throw new NullReferenceException($"problem type {problemType} could not be resolved");
+        Console.Clear();
+        problem.Run();        
     }
     else {
-
-        getProblem();
-
+        Console.WriteLine($"{problemChosen} is not a valid selection");        
     }
 
+    Console.WriteLine("Press any key to return to the problem menu");
+    Console.ReadKey();
+    GetProblem();
 }
 
-getProblem();
+void PrintProblems() {
+    Console.Clear();
+    foreach (PROBLEM problem in Enum.GetValues(typeof(PROBLEM))) {
+        Console.WriteLine($"{(int)problem}) {problem}");
+    }
+}
+
+GetProblem();
 
 /// <summary>
 /// Problems coming from this list
@@ -70,10 +48,12 @@ getProblem();
 /// outdated as of 2024-11-30
 /// </summary>
 enum PROBLEM {
+    QUIT,
     TWOSUM,
     LONGEST_SUBSTRING_WITHOUT_REPEATING,
     LONGEST_PALINDROMIC_SUBSTRING,
     REMOVE_NTH_NODE,
     SET_MATRIX_ZEROES,
-    VALIDATE_BINARY_SEARCH_TREE
+    VALIDATE_BINARY_SEARCH_TREE,
+    MERGE_TWO_SORTED_LISTS
 }
